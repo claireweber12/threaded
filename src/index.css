@@ -1,0 +1,62 @@
+:root{
+  --background: #f5e6f7;
+  --text: #2E2925;;
+
+
+
+  font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-width:320px;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.navbar{
+  padding: 1.5rem 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:1.4rem;
+}
+
+.links {
+  display:flex;
+  justify-content:space-between;
+  list-style:none;
+  align-items:center;
+  
+}
+
+.navbar a{
+  color: var(--text);
+  text-decoration:none;
+  margin:.6rem;
+
+}
