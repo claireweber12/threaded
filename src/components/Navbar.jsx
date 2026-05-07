@@ -1,17 +1,20 @@
+import { Link } from "react-router-dom";
 
 function Navbar() {
-    return(
-        
-        <nav className = "navbar section">
-            <a className="logo" href="#">Threaded</a>
-            <ul className='links'>
-                <li><a id='home' href='#'>Home</a></li>
-                <li><a id='projects' href='#'>My Projects</a></li>
-                <li><a id='explore' href='#'>Explore</a></li>
-                <li><a id='addProject' href='#'>+ New Project</a></li>
-            </ul>
-        </nav>
-    )
+  return (
+    <nav className="navbar">
+      <Link to="/" className="logo">
+        Threaded
+      </Link>
+
+      <div className="nav-links">
+        <Link to="/" className='links-nav'>Home</Link>
+        <Link to="/my-projects" className='links-nav'>My Projects</Link>
+        <Link to="/explore" className='links-nav'>Explore</Link>
+        <Link to="/new-project" className='links-nav'>+ New Project</Link>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
