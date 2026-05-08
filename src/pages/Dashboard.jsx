@@ -3,7 +3,7 @@ import ProjectCard from "../components/ProjectCard";
 
 function Dashboard() {
   return (
-    <main>
+    <main className='projects-page'>
       <h1>My Projects</h1>
       <p>View and manage your needlepoint projects.</p>
 

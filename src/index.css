@@ -1,8 +1,11 @@
 :root{
-  --background: #f5e6f7;
-  --text: #2E2925;;
-
-
+  --background: #f5f6f2;
+  --text: #2E2925;
+  --light-accent:#d5e7c4;
+  --dark-accent:#6a9f65;
+  --light-pink:#e8c9bd;
+  --dark-blue:#3d4d82;
+  --light-blue:#b3cdef;
 
   font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: var(--text);
@@ -85,16 +88,63 @@ button {
   border-radius: 1rem;
   border-width:2px;
   font-size:1.1rem;
-  background-color:rgb(152, 98, 125);
-  border-color:rgb(152, 98, 125);
+  background-color:var(--dark-blue);
+  border-color:var(--dark-blue);
   color:white;
   font-weight:bold;
   cursor: pointer;
 }
 
 .home-button:hover{
-  background-color:rgb(255, 187, 221);
+  background-color:var(--light-blue);
 }
+
+.projects-page{
+  padding: 1.5rem 5%;
+}
+.project-grid{
+  padding:1.5rem 5%;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:5%;
+  align-items: center;
+}
+
+.project-card{
+  background-color:#ffffff;
+  border-radius:15px;
+  min-height: 20rem;
+  padding:1.2rem;
+  display:grid;
+  grid-template-rows: 2fr 1fr;
+}
+.project-image-placeholder{
+  background-color: var(--light-blue);
+  height:23rem;
+}
+
+.project-card-content p{
+  color:var(--light-blue);
+}
+
+.project-card-content h3{
+  color:var(--dark-blue);
+}
+
+.project-tags{
+  display:flex;
+  justify-content:space-evenly;
+}
+.project-tag{
+  background-color:var(--light-pink);
+  padding:7px;
+  font-size: .9rem;
+  border-radius: 15px;
+}
+
+
+
+
 
 
 
