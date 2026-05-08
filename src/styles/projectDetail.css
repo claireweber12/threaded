@@ -61,14 +61,10 @@
     margin:0;
 }
 
-.thread-container{
-    display:flex;
-    align-items:center;
-}
 
 .thread-dot{
-    width:18px;
-    height:18px;
+    width:20px;
+    height:20px;
     border-radius: 50%;
     border: 1px solid white;
     display:flex;
