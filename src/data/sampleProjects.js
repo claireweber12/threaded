@@ -6,6 +6,8 @@ const sampleProjects = [
         status: "In Progress",
         designer: "Lycette Designs",
         tags: ["sayings", "beginner"],
+        description: `Super cute white and pink sign that says Don't be Dull in script font! 
+        This would be so cute stitched in Very Velvet!`, 
         threads:[
             {
                 brand: "Silk and Ivory",
@@ -33,6 +35,8 @@ const sampleProjects = [
         status: "Completed",
         designer: "Sunday Shoppe",
         tags: ["ornament", "round", "college"],
+        description: `This ornament round is perfect for Auburn fans! A fun reminder
+        of rolling the trees after a big win!`,
         threads:[
             {
                 brand: "Pepper Pot Silk",
