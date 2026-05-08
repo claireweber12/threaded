@@ -1,0 +1,33 @@
+
+
+.navbar{
+  padding: 1.5rem 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:1.4rem;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+.nav-links {
+  display:flex;
+  justify-content:space-between;
+  list-style:none;
+  align-items:center;
+  
+}
+
+.links-nav {
+  color: var(--text);
+  text-decoration:none;
+  margin:.6rem;
+
+}

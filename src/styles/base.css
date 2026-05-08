@@ -1,0 +1,29 @@
+
+
+:root{
+  --background: #f5f6f2;
+  --text: #2E2925;
+  --light-accent:#d5e7c4;
+  --dark-accent:#6a9f65;
+  --light-pink:#e8c9bd;
+  --dark-blue:#3d4d82;
+  --light-blue:#b3cdef;
+  font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-width:320px;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+button {
+  cursor: pointer;
+}
