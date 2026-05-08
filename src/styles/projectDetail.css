@@ -1,0 +1,44 @@
+
+
+.project-detail{
+    padding:2rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:1.5rem;
+}
+
+.card{
+    width: min(900px, 80%);
+    background-color: floralwhite;
+    border-radius:1.5rem;
+    overflow:hidden;
+    border: 1px solid white;
+    box-shadow: lightgrey;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+}
+
+
+.project-name-detailPage{
+    text-align:center;
+}
+
+.project-image{
+    background-color:white;
+    width:100%;
+    height:20rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.detailPage-content{
+    padding:1.5rem;
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+
+}
