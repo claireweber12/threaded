@@ -1,5 +1,5 @@
 @import "./base.css";
-@import "./navbar.css";
+
 
 .new-project-page{
     height:100vh;
@@ -8,7 +8,7 @@
     align-items:center;
 }
 
-h1{
+.new-project-page h1{
     margin-bottom:0;
 }
 
@@ -28,11 +28,21 @@ h1{
     grid-template-rows:1fr 1fr;
     height:auto;
     width:100%;
+    
 
 }
 .form-row{
     display:flex;
     gap:2rem;
+}
+
+select{
+    width:16rem;
+    box-sizing:border-box;
+    height:auto;
+    padding:12px;
+    font-size:1rem;
+
 }
 
 .form-group{
@@ -41,15 +51,32 @@ h1{
     margin-top:.5rem;
 
 }
-input, select{
-    width:20rem;
-    height: 2.2rem;
-    font-size:1rem;
-}
+
 textArea{
     width:30rem;
     height:6rem;
 }
+
+.new-project-page input{
+    box-sizing:border-box;
+    width:15rem;
+    height:auto;
+    padding:12px;
+}
+
+#add-thread-btn{
+    width:50%;
+    padding:7px;
+    font-size: 1rem;
+    margin-top:1rem;
+}
+
+.added-thread-item{
+   display:flex;
+   align-items:center;
+   gap:10px;
+}
+
 
 #create-btn{
     width:70%;
