@@ -15,3 +15,41 @@ export async function getProjects() {
 
   return data;
 }
+
+export async function createProject(projectData){
+  const { title, designer, status, notes, threads } = projectData;
+  const { data: createdProject, error: projectError } = await supabase
+  .from("projects")
+  .insert({
+    title: title,
+    designer: designer,
+    status: status,
+    notes: notes,
+  })
+  .select()
+  .single();
+
+  if (projectError){
+    throw projectError;
+  }
+  const threadRows = threads.map((thread) => ({
+    project_id: createdProject.id,
+    brand: thread.brand,
+    color_number: thread.colorNumber,
+    color_name: thread.colorName,
+    color_hex: thread.colorHex,
+  }));
+
+  if (threadRows.length > 0) {
+    const { error: threadError } = await supabase
+      .from("project_threads")
+      .insert(threadRows);
+
+    if (threadError) {
+      throw threadError;
+    }
+  }
+
+  return createdProject;
+
+}

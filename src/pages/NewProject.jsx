@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { createProject } from "../services/ProjectService";
+import { useNavigate } from "react-router-dom";
 
 function NewProject() {
     const [projectTitle, setProjectTitle] = useState("");
     const [projectDesigner, setProjectDesigner] = useState("");
     const [projectStatus, setProjectStatus] = useState("");
+    const navigate = useNavigate();
     const [notes, setNotes] = useState("");
     const [thread, setThread] = useState({
         brand:"",
@@ -12,6 +15,7 @@ function NewProject() {
         colorHex:"",
     });
     const[threads, setThreads] = useState([]);
+
 
     function handleAddThread(){
         if (!thread.brand && !thread.colorNumber && !thread.colorName && !thread.colorHex){
@@ -42,34 +46,38 @@ function NewProject() {
         });
     }
 
-    function handleSubmit(e) {
+     async function handleSubmit(e) {
         e.preventDefault();
         const newProject={
             title : projectTitle,
             designer : projectDesigner,
             status : projectStatus,
-            threads : threads,
             notes : notes,
+            threads : threads,
         };
-        console.log(newProject);
+        try{
+            await createProject(newProject);
+            setProjectTitle("");
+            setProjectDesigner("");
+            setProjectStatus("");
+            setNotes("");
+
+            setThread({
+                brand: "",
+                colorNumber: "",
+                colorName: "",
+                colorHex: "",
+            });
+
+            setThreads([]);
+
+            navigate("/my-projects");
+            }catch(err){
+                console.error(err);
+                alert("Something went wrong while creating the project");
+            }
         
-        setProjectTitle("");
-        setProjectDesigner("");
-        setProjectStatus("");
-        setNotes("");
-
-        setThread({
-            brand: "",
-            colorNumber: "",
-            colorName: "",
-            colorHex: "",
-        });
-
-        setThreads([]);
-
-        alert("Project created! Check the console.");
-        
-    }
+        }
     
     
 
