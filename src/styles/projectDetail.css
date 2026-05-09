@@ -1,4 +1,4 @@
-
+@import "./base.css";
 
 .project-detail{
     display:grid;
@@ -68,6 +68,19 @@
     border-radius: 50%;
     border: 1px solid white;
     display:flex;
+}
+
+.del-btn{
+    padding-top:20px;
+    display:flex;
+}
+
+.del-btn button{
+    background-color:var(--light-pink);
+    border-width:1px;
+    padding:7px;
+    border-radius:10px;
+    border-color:var(--light-pink);
 }
 
 

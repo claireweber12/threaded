@@ -32,7 +32,7 @@ export async function createProject(projectData){
   if (projectError){
     throw projectError;
   }
-  const threadRows = threads.map((thread) => ({
+  const threadRows = (threads || []).map((thread) => ({
     project_id: createdProject.id,
     brand: thread.brand,
     color_number: thread.colorNumber,
@@ -54,7 +54,7 @@ export async function createProject(projectData){
 
 }
 
-export async function getProjectbyId(passedId){
+export async function getProjectById(passedId){
   const { data, error } = await supabase
     .from("projects")
     .select(`
@@ -62,11 +62,22 @@ export async function getProjectbyId(passedId){
       project_threads (*)
     `)
     .eq("id", passedId)
-    .order("created_at", { ascending: false });
+    .single();
 
   if (error) {
     throw error;
   }
 
   return data;
+}
+
+export async function deleteProject(id){
+  const {error} = await supabase
+  .from("projects")
+  .delete()
+  .eq("id", id);
+
+  if (error){
+    throw error;
+  }
 }

@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProjectById } from "../services/projectService";
+import { getProjectById, deleteProject} from "../services/projectService";
 
 
 function ProjectDetail(){
     const {id} = useParams();
-    const [project, setProject] = useState([]);
+    const navigate = useNavigate();
+    const [project, setProject] = useState(null);
     const[error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -14,8 +15,8 @@ function ProjectDetail(){
         async function loadProject() {
           try{
             const data = await getProjectById(id);
-            const selectedProject = data;
-            setProject(selectedProject);
+            console.log(data);
+            setProject(data)
           } catch(err) {
             console.log(err);
             setError("Could not load projects.");
@@ -23,15 +24,9 @@ function ProjectDetail(){
             setLoading(false);
           }
         }
-        loadProject();
-    }, []);
-    if(!project){
-        return(
-            <main className="dashboard-page">
-                <h1>Project not found</h1>
-            </main>
-        );
-    }
+        if(id) loadProject();
+    }, [id]);
+    
     if (loading){
     return (
       <main className="dashboard-page">
@@ -48,7 +43,27 @@ function ProjectDetail(){
       </main>
     );
     }
-    
+
+    async function handleDelete(){
+        const confirmed = window.confirm("Are you sure you want to delete this project?");
+        if (!confirmed){
+            return;
+        }
+        try{
+            await deleteProject(project.id);
+            navigate("/my-projects");
+        } catch(err) {
+            console.error(err);
+            alert("Something went wrong while deleting the project");
+        }
+    }
+    if(!project){
+        return(
+            <main className="dashboard-page">
+                <h1>Project not found</h1>
+            </main>
+        );
+    }
     
     return(
         <div className='project-detail page'>
@@ -88,7 +103,12 @@ function ProjectDetail(){
                         </p>
                         </div>
                     ))}
-                    </div>
+                </div>
+                <div className='del-btn'>
+                    <button type='button' 
+                    onClick={handleDelete}
+                    >Delete Project</button>
+                </div>
             </div>
         </div>
     )
