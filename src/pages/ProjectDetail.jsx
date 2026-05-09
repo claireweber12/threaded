@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProjects } from "../services/projectService";
+import { getProjectById } from "../services/projectService";
 
 
 function ProjectDetail(){
@@ -11,10 +11,10 @@ function ProjectDetail(){
 
     // loads data from supabase and chooses project with matching id
     useEffect(() => {
-        async function loadProjects() {
+        async function loadProject() {
           try{
-            const data = await getProjects();
-            const selectedProject = data.find((p) => p.id === id);
+            const data = await getProjectById(id);
+            const selectedProject = data;
             setProject(selectedProject);
           } catch(err) {
             console.log(err);
@@ -23,7 +23,7 @@ function ProjectDetail(){
             setLoading(false);
           }
         }
-        loadProjects();
+        loadProject();
     }, []);
     if(!project){
         return(

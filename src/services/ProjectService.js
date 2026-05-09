@@ -53,3 +53,20 @@ export async function createProject(projectData){
   return createdProject;
 
 }
+
+export async function getProjectbyId(passedId){
+  const { data, error } = await supabase
+    .from("projects")
+    .select(`
+      *,
+      project_threads (*)
+    `)
+    .eq("id", passedId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
