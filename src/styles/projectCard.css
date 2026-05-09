@@ -7,10 +7,31 @@
   padding:1.2rem;
   display:grid;
   grid-template-rows: 2fr 1fr;
+
 }
 .project-image-placeholder{
   background-color: var(--light-blue);
-  height:23rem;
+  min-height:40px;
+}
+
+.thread-palette{
+  display:flex;
+  padding:10px;
+}
+
+.row-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:space-evenly;
+}
+
+.color-dot{
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  border: 1px solid white;
+  display:flex;
+  cursor:pointer;
 }
 
 .project-card-content p{

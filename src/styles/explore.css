@@ -1,0 +1,23 @@
+@import "./base.css";
+
+.explore-page{
+    background-color:var(--background);
+    height:100vh;
+
+}
+
+.start-explore{
+    width:100%;
+    padding:1.5rem 5%;
+    height:auto;
+    background-color:whitesmoke;
+    border-radius: 30px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap:2rem;
+    margin-top:2rem;
+}
+
+.explore-top-text{
+    text-align:center;
+}
