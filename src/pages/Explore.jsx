@@ -1,13 +1,51 @@
-import sampleProjects from "../data/sampleProjects";
+import { getProjects } from "../services/projectService";
 import ProjectCard from "../components/ProjectCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {FaSearch} from "react-icons/fa";
 
 function Explore(){
     const [searchTerm, setSearchTerm] = useState("");
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error , setError] = useState(null);
+
+    // Load Projects from Supabase
+    useEffect(() => {
+    async function loadProjects() {
+      try{
+        const data = await getProjects();
+        setProjects(data);
+      } catch(err) {
+        console.log(err);
+        setError("Could not load projects.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProjects();
+    }, []);
+
+    if (loading){
+    return (
+      <main className="dashboard-page">
+        <h1>My Projects</h1>
+        <p>Loading projects...</p>
+      </main>
+    );
+    }
+
+    if(error){
+    return(
+      <main className='dashboard-page'>
+        <h1>My Projects</h1>
+        <p>{error}</p>
+      </main>
+    );
+    }
+
     const filteredData = 
     searchTerm === ""
-    ? sampleProjects
+    ? projects
     : sampleProjects.filter((project) => (
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.designer.toLowerCase().includes(searchTerm.toLowerCase()) ||
