@@ -102,7 +102,7 @@ function NewProject() {
                         onChange={(e) => setProjectStatus(e.target.value)}
                         >
                             <option value='planned'>Planned</option>
-                            <option value='started'>Started</option>
+                            <option value='in progress'>In Progress</option>
                             <option value='completed'>Completed</option>
                             <option value='paused'>Paused</option>
                             <option value='abandoned'>Abandoned</option>

@@ -1,9 +1,31 @@
-
+@import "./base.css";
 
 .projects-page{
   padding: 1.5rem 5%;
+  width:100%;
 }
 
+.filter-buttons{
+  display:flex;
+  gap:20px;
+}
+
+.filter-buttons button{
+  box-sizing:border-box;
+  padding:5px 10px 5px 10px;
+  border-radius:10px;
+  border-width:1px;
+  cursor:pointer;
+  background-color:var(--light-accent);
+}
+
+.filter-buttons button:hover{
+  background-color:var(--dark-accent);
+}
+
+.filter-button.active {
+  background-color:var(--dark-accent);
+}
 
 .project-grid {
   display: grid;
