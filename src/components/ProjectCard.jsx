@@ -12,12 +12,12 @@ function ProjectCard({ project }) {
           <div className='row-wrapper'>
             <p className="project-status">{project.status}</p>
             <div className="thread-palette">
-              {project.threads.map((thread) => (
+              {(project.project_threads || []).map((thread) => (
                 <span
-                  key={`${thread.brand}-${thread.colorNumber}`}
+                  key={`${thread.brand}-${thread.color_number}`}
                   className="thread-dot"
-                  style={{ backgroundColor: thread.colorHex }}
-                  title={`${thread.brand} ${thread.colorNumber} - ${thread.colorName}`}
+                  style={{ backgroundColor: thread.color_hex }}
+                  title={`${thread.brand} ${thread.color_number} - ${thread.color_name}`}
                 ></span>
               ))}
             </div>
@@ -29,14 +29,15 @@ function ProjectCard({ project }) {
             Designed by {project.designer}
           </p>
 
-
-          <div className="project-tags">
-            {project.tags.map((tag) => (
-              <span key={tag} className="project-tag">
-                #{tag}
-              </span>
-            ))}
-          </div>
+          {project.tags && (
+            <div className="project-tags">
+              {project.tags.map((tag) => (
+                <span key={tag} className="project-tag">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </article>
     </Link>

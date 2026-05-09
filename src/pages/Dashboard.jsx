@@ -1,13 +1,51 @@
-import sampleProjects from "../data/sampleProjects";
+
 import ProjectCard from "../components/ProjectCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProjects } from "../services/projectService";
 
 function Dashboard() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState('All');
+  useEffect(() => {
+    async function loadProjects() {
+      try{
+        const data = await getProjects();
+        console.log("Projects from supaBase:", data);
+        setProjects(data);
+      } catch(err) {
+        console.log(err);
+        setError("Could not load projects.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProjects();
+  }, []);
   const filteredProjects = 
     selectedStatus === 'All'
-    ? sampleProjects
-    : sampleProjects.filter((project) => project.status === selectedStatus);
+    ? projects
+    : projects.filter((project) => project.status === selectedStatus);
+
+  if (loading){
+    return (
+      <main className="dashboard-page">
+        <h1>My Projects</h1>
+        <p>Loading projects...</p>
+      </main>
+    );
+  }
+
+  if(error){
+    return(
+      <main className='dashboard-page'>
+        <h1>My Projects</h1>
+        <p>{error}</p>
+      </main>
+    );
+  }
+
   return (
     <main className='projects-page'>
       <h1>My Projects</h1>
