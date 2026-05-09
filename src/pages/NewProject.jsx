@@ -1,25 +1,106 @@
+import { useState } from "react";
 
 function NewProject() {
+    const [projectTitle, setProjectTitle] = useState("");
+    const [projectDesigner, setProjectDesigner] = useState("");
+    const [projectStatus, setProjectStatus] = useState("");
+    const [notes, setNotes] = useState("");
+    const [thread, setThread] = useState({
+        brand:"",
+        colorNumber:"",
+        colorName: "",
+        colorHex:"",
+    });
+    const[threads, setThreads] = useState([]);
+
+    function handleAddThread(){
+        if (!thread.brand && !thread.colorNumber && !thread.colorName && !thread.colorHex){
+            return;
+        }
+
+        const newThread = {
+            brand: thread.brand,
+            colorNumber: thread.colorNumber,
+            colorName: thread.colorName,
+            colorHex: thread.colorHex,
+        }
+        setThreads([...threads, newThread]);
+
+        setThread({
+            brand: "",
+            colorNumber:"",
+            colorName:"",
+            colorHex: "",
+        });
+    }
+
+    function handleThreadChange(e){
+        const {name, value} = e.target;
+        setThread({
+            ...thread,
+            [name]:value,
+        });
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const newProject={
+            title : projectTitle,
+            designer : projectDesigner,
+            status : projectStatus,
+            threads : threads,
+            notes : notes,
+        };
+        console.log(newProject);
+        
+        setProjectTitle("");
+        setProjectDesigner("");
+        setProjectStatus("");
+        setNotes("");
+
+        setThread({
+            brand: "",
+            colorNumber: "",
+            colorName: "",
+            colorHex: "",
+        });
+
+        setThreads([]);
+
+        alert("Project created! Check the console.");
+        
+    }
+    
+    
+
+
     return(
         <main className='new-project-page'>
             <h1>Add New Project!</h1>
             <p>Start documenting a new project</p>
-            <div className='form-card'>
+            <form className='form-card' onSubmit={handleSubmit}>
                 <h3>Project Details:</h3>
                 <div className='form-section'>
                     <div className='form-row'>
                         <div className='form-group'>
                             <label htmlFor='title'>Title</label>
-                            <input id='title' type='text'/>
+                            <input id='title' name='title' value={projectTitle}
+                            onChange={(e) => setProjectTitle(e.target.value)}
+                            type='text'/>
                         </div>
                         <div className='form-group'>
                             <label htmlFor='designer'>Designer</label>
-                            <input id='designer' type='text'/>
+                            <input id='designer' type='text' name='designer'
+                            value={projectDesigner}
+                            onChange={(e) => setProjectDesigner(e.target.value)}
+                            />
                         </div>
                     </div>
-                    <div className='form-group'>
+                    <div className='form-group form-row'>
                         <label htmlFor='status'>Project Status</label>
-                        <select id='status'>
+                        <select id='status' name='status' value={projectStatus}
+                        onChange={(e) => setProjectStatus(e.target.value)}
+                        >
                             <option value='planned'>Planned</option>
                             <option value='started'>Started</option>
                             <option value='completed'>Completed</option>
@@ -33,34 +114,68 @@ function NewProject() {
                     <div className='form-row'>
                         <div className='form-group'>
                             <label htmlFor='brand'>Brand</label>
-                            <input id='brand' type='text'/>
+                            <input id='brand' name='brand' type='text' value={thread.brand}
+                            onChange={handleThreadChange}
+                            />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='number'>Number</label>
-                            <input id='number' type='text'/>
+                            <label htmlFor='colorNumber'>Number</label>
+                            <input id='colorNumber' name='colorNumber' type='text'
+                            value={thread.colorNumber} onChange={(handleThreadChange)}
+                            />
                         </div>
                     </div>
                     <div className='form-row'>
                         <div className='form-group'>
-                            <label htmlFor='color-name'>Color Name</label>
-                            <input id='color-name' type='text' />
+                            <label htmlFor='colorName'>Color Name</label>
+                            <input id='colorName' name='colorName' type='text'
+                            value={thread.colorName} onChange={handleThreadChange}
+                            />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='num-skeins'>Number of Skeins</label>
-                            <input id='num-skiens' type='text'/>
+                            <label htmlFor='colorHex'>Hex Value</label>
+                            <input id='colorHex' name='colorHex' type='text'
+                            value={thread.colorHex} onChange={handleThreadChange}
+                            />
                         </div>
+                    </div>
+                    <button id='add-thread-btn'type='button' onClick={handleAddThread}>
+                        Add Thread
+                    </button>
+                    <div className='addedThreads'>
+                        <h3>Threads Added</h3>
+                        {threads.length === 0 ? (
+                            <p>No threads added yet.</p>
+                        ) : (
+                            threads.map((thread, index) => (
+                                <div key={index} className="added-thread-item">
+                                    <span
+                                        className='thread-dot'
+                                        style={{backgroundColor:thread.colorHex}}
+                                    ></span>
+                                    <p>
+                                        {thread.brand} {thread.colorNumber} {thread.colorName}
+                                    </p>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
                 <div className='form-section'>
                     <div className='form-group'>
-                        <label htmlFor='text-area'>Notes:</label>
-                        <textarea id='text-area'></textarea>
+                        <label htmlFor='notes'>Notes:</label>
+                        <textarea id='notes' name='notes' value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        placeholder="Add project notes, stitch ideas, or anything you want to remember..."
+                        ></textarea>
                     </div>
                 </div>
 
-                <button id='create-btn'>Create Project</button>
+                <button id='create-btn' type='submit'>Create Project</button>
 
-            </div>
+            </form>
+
+
         </main>
         
     )
