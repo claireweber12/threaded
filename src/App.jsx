@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard.jsx"
 import Explore from "./pages/Explore.jsx";
 import NewProject from './pages/NewProject.jsx';
 import ProjectDetail from "./pages/ProjectDetail.jsx";
+import EditProject from "./pages/EditProject.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/my-projects" element={<Dashboard />} />
         <Route path='/projects/:id' element = {<ProjectDetail />}/>
+        <Route path="/projects/:id/edit" element={<EditProject />}/>
         <Route path="/explore" element={<Explore />} />
         <Route path="/new-project" element={<NewProject />} />
       </Routes>

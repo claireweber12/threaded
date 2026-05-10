@@ -81,3 +81,53 @@ export async function deleteProject(id){
     throw error;
   }
 }
+
+export async function updateProject(id, updatedProject) {
+  const { title, designer, status, notes, threads } = updatedProject;
+
+  const { data: updatedProjectRow, error: projectError } = await supabase
+    .from("projects")
+    .update({
+      title,
+      designer,
+      status,
+      notes,
+    })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (projectError) {
+    throw projectError;
+  }
+
+  const { error: deleteThreadsError } = await supabase
+    .from("project_threads")
+    .delete()
+    .eq("project_id", id);
+
+  if (deleteThreadsError) {
+    throw deleteThreadsError;
+  }
+
+  const threadRows = (threads || []).map((thread) => ({
+    project_id: id,
+    brand: thread.brand,
+    color_number: thread.colorNumber,
+    color_name: thread.colorName,
+    color_hex: thread.colorHex,
+  }));
+
+  if (threadRows.length > 0) {
+    const { error: insertThreadsError } = await supabase
+      .from("project_threads")
+      .insert(threadRows);
+
+    if (insertThreadsError) {
+      throw insertThreadsError;
+    }
+  }
+
+  return updatedProjectRow;
+}
+

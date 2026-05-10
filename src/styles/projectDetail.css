@@ -70,12 +70,13 @@
     display:flex;
 }
 
-.del-btn{
+.del-edit{
     padding-top:20px;
     display:flex;
+    justify-content:space-evenly;
 }
 
-.del-btn button{
+.del-edit button{
     background-color:var(--light-pink);
     border-width:1px;
     padding:7px;

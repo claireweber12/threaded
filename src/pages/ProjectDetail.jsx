@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProjectById, deleteProject} from "../services/projectService";
 
@@ -104,10 +104,13 @@ function ProjectDetail(){
                         </div>
                     ))}
                 </div>
-                <div className='del-btn'>
+                <div className='del-edit'>
                     <button type='button' 
                     onClick={handleDelete}
                     >Delete Project</button>
+                    <Link className='edit-link' to={`/projects/${project.id}/edit`}>
+                    Edit Project
+                    </Link>
                 </div>
             </div>
         </div>
