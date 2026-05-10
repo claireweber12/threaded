@@ -17,6 +17,7 @@ function NewProject() {
     });
     const[threads, setThreads] = useState([]);
     const [imageFile, setImageFile] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
 
     function handleAddThread(){
@@ -60,6 +61,7 @@ function NewProject() {
             setFormError("Project title is required");
             return;
         }
+        setIsSubmitting(true);
         const imageUrl = await uploadProjectImage(imageFile);
         const newProject={
             title : projectTitle,
@@ -89,6 +91,8 @@ function NewProject() {
             }catch(err){
                 console.error(err);
                 alert("Something went wrong while creating the project");
+            }finally{
+                setIsSubmitting("true");
             }
         
         }
@@ -201,7 +205,9 @@ function NewProject() {
                     </div>
                 </div>
                 {formError && <p className="form-error">{formError}</p>}
-                <button id='create-btn' type='submit'>Create Project</button>
+                <button id='create-btn' type='submit' disabled={isSubmitting}>
+                    {isSubmitting ? "Creating..." : "Create Project"}
+                </button>
 
             </form>
 

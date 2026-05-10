@@ -24,6 +24,7 @@ function EditProject() {
     const [imageFile, setImageFile] = useState(null);
     const [imageUrl, setImageUrl] = useState("");
     const [removeImage, setRemoveImage] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
 
     useEffect(() => {
@@ -69,10 +70,11 @@ function EditProject() {
             setFormError("Project title is required");
             return;
         }
-        if(!ProjectStatus){
+        if(!projectStatus){
             setFormError("Project status is required");
             return;
         }
+        setIsSubmitting(true);
         let finalImageUrl = imageUrl;
         if(imageFile){
             finalImageUrl = await uploadProjectImage(imageFile);
@@ -95,6 +97,8 @@ function EditProject() {
         }catch(err){
             console.error(err);
             alert("Something went wrong while editing the project");
+        } finally {
+            setIsSubmitting(true);
         }
         
     }
@@ -274,7 +278,9 @@ function EditProject() {
                     <button type="button" id="cancel-btn" onClick={() => navigate(`/projects/${id}`)}>
                         Cancel
                     </button>
-                    <button id='create-btn' type='submit'>Save Changes</button>
+                    <button id='create-btn' type='submit' disabled={isSubmitting}>
+                        {isSubmitting ? "Saving..." : "Save Changes"}
+                    </button>
                 </div>
 
             </form>
