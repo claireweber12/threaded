@@ -151,20 +151,20 @@ function EditProject() {
                 <h3>Project Details:</h3>
                 <div>
                     {project.image_url ? (
-                        <img
-                            src={imageUrl}
-                            className="edit-project-image"
-                        />
+                        <>
+                            <img src={imageUrl}
+                            className="edit-project-image" />
+                        
+                            <button type='button' className="delete-picture-btn" 
+                            onClick={handleDeleteImage}
+                            >Delete Image</button>
+                        </>
                         ) : (
                         <input type='file'
                             accept='image/*'
                             onChange={(e) => setImageFile(e.target.files[0])}
                         />
                     )}
-
-                    <button type='button' className="delete-picture-btn" 
-                    onClick={handleDeleteImage}
-                    >Delete Image</button>
                     
                 </div>
                 <div className='form-section'>
