@@ -25,7 +25,8 @@ function Dashboard() {
   const filteredProjects = 
     selectedStatus === 'All'
     ? projects
-    : projects.filter((project) => project.status === selectedStatus);
+    : projects.filter((project) => project.status?.toLowerCase() === selectedStatus.toLowerCase()
+  );
 
   if (loading){
     return (

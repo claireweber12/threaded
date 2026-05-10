@@ -64,6 +64,15 @@ function ProjectDetail(){
             </main>
         );
     }
+    function getStatusClass(status){
+    if (status === "planned") return "status-planned";
+    if (status === "in_progress") return "status-progress";
+    if (status === "completed") return "status-completed";
+    if (status === "paused") return "status-paused";
+    if (status === "abandoned") return "status-abandoned";
+
+    return "status-default";
+    }
     
     return(
         <div className='project-detail page'>
@@ -92,8 +101,13 @@ function ProjectDetail(){
             <div className='detailPage-content'>
                 <h1 className='project-name-detailPage page-title'>{project.title}</h1>
                 <div className='details'>
-                    <p>{project.status}</p>
-                    <p>{project.designer}</p>
+                    
+                    <div className={`${getStatusClass(project.status)}`}>{project.status}</div>
+                
+                
+                    <div>{project.designer}</div>
+                    
+                    
                 </div>
                 <p className='description'>{project.notes}</p>
                 <div className="thread-list">

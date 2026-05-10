@@ -1,6 +1,16 @@
 import { Link } from 'react-router-dom';
 
 function ProjectCard({ project }) {
+
+  function getStatusClass(status){
+    if (status === "planned") return "status-planned";
+    if (status === "inProgress") return "status-progress";
+    if (status === "completed") return "status-completed";
+    if (status === "paused") return "status-paused";
+    if (status === "abandoned") return "status-abandoned";
+
+    return "status-default";
+  }
   return (
     <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <article className="project-card">
@@ -18,7 +28,7 @@ function ProjectCard({ project }) {
 
         <div className="project-card-content">
           <div className='row-wrapper'>
-            <p className="project-status">{project.status}</p>
+            <div className={`${getStatusClass(project.status)}`}>{project.status}</div>
             <div className="thread-palette">
               {(project.project_threads || []).map((thread) => (
                 <span
