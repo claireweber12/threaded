@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createProject } from "../services/ProjectService";
+import { createProject, uploadProjectImage } from "../services/ProjectService";
 import { useNavigate } from "react-router-dom";
 
 function NewProject() {
@@ -15,6 +15,7 @@ function NewProject() {
         colorHex:"",
     });
     const[threads, setThreads] = useState([]);
+    const [imageFile, setImageFile] = useState(null);
 
 
     function handleAddThread(){
@@ -48,12 +49,14 @@ function NewProject() {
 
      async function handleSubmit(e) {
         e.preventDefault();
+        const imageUrl = await uploadProjectImage(imageFile);
         const newProject={
             title : projectTitle,
             designer : projectDesigner,
             status : projectStatus,
             notes : notes,
             threads : threads,
+            image_url: imageUrl,
         };
         try{
             await createProject(newProject);
@@ -88,6 +91,12 @@ function NewProject() {
             <p>Start documenting a new project</p>
             <form className='form-card' onSubmit={handleSubmit}>
                 <h3>Project Details:</h3>
+                <div className='form-section'>
+                    <input type='file'
+                    accept='image/*'
+                    onChange={(e) => setImageFile(e.target.files[0])}
+                    />
+                </div>
                 <div className='form-section'>
                     <div className='form-row'>
                         <div className='form-group'>

@@ -17,7 +17,7 @@ export async function getProjects() {
 }
 
 export async function createProject(projectData){
-  const { title, designer, status, notes, threads } = projectData;
+  const { title, designer, status, notes, threads, image_url } = projectData;
   const { data: createdProject, error: projectError } = await supabase
   .from("projects")
   .insert({
@@ -25,6 +25,7 @@ export async function createProject(projectData){
     designer: designer,
     status: status,
     notes: notes,
+    image_url:image_url,
   })
   .select()
   .single();
@@ -129,5 +130,30 @@ export async function updateProject(id, updatedProject) {
   }
 
   return updatedProjectRow;
+}
+
+export async function uploadProjectImage(file) {
+  if(!file){
+    return null;
+  }
+
+  const fileExt = file.name.split(".").pop();
+  const fileName = `${crypto.randomUUID()}.${fileExt}`;
+  const filePath = `projects/${fileName}`;
+
+  const {error: uploadError} = await supabase.storage
+    .from("project-images")
+    .upload(filePath, file);
+
+    if(uploadError){
+      throw uploadError;
+    }
+
+    const{data} = supabase.storage
+      .from("project-images")
+      .getPublicUrl(filePath);
+  
+  return data.publicUrl;
+    
 }
 

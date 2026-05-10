@@ -52,3 +52,10 @@
   font-size: .9rem;
   border-radius: 15px;
 }
+
+.project-card-image{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  display:block;
+}

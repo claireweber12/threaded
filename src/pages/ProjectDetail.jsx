@@ -68,9 +68,17 @@ function ProjectDetail(){
     return(
         <div className='project-detail page'>
             <div className='left-column'>
-                <div className='project-image'>
+                {project.image_url ? (
+                <img
+                    src={project.image_url}
+                    alt={project.title}
+                    className="project-detail-image"
+                />
+                ) : (
+                <div className="project-image">
                     <p>image placeholder</p>
                 </div>
+                )}
                 {project.tags && (
                     <div className='project-tags'>
                             {project.tags.map((tag) => (

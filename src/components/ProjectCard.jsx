@@ -4,9 +4,17 @@ function ProjectCard({ project }) {
   return (
     <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <article className="project-card">
-        <div className="project-image-placeholder">
-          No image yet
-        </div>
+        {project.image_url ? (
+          <img
+            src={project.image_url}
+            alt={project.title}
+            className="project-card-image"
+          />
+        ) : (
+          <div className="project-image-placeholder">
+            No image yet
+          </div>
+        )}
 
         <div className="project-card-content">
           <div className='row-wrapper'>
