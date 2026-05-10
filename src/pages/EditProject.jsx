@@ -156,9 +156,9 @@ function EditProject() {
     }
     
     return(
-        <main className='edit-project-page'>
-            <h1>Edit Project</h1>
-            <p>start editing your project</p>
+        <main className='page-form page'>
+            <h1 className='page-title'>Edit Project</h1>
+            <p className='page-description'>start editing your project</p>
             <form className='form-card' onSubmit={handleSubmit}>
                 <h3>Project Details:</h3>
                 <div>

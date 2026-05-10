@@ -1,7 +1,7 @@
 
 function Home(){
     return(
-       <div className='section homepage'>
+       <div className='section homepage page' >
             <div className='home-text'>
                 <h1 id='title'>Threaded</h1>
                 <h2 id='subtitle'>A creative home for every canvas, color, and stitch</h2>

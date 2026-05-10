@@ -1,29 +1,19 @@
-@import "./base.css";
 
 
-.new-project-page{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+
+.form-card {
+  background: var(--sage-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
 }
 
-.new-project-page h1{
-    margin-bottom:0;
-}
-
-
-.form-card{
-    background-color:var(--sage-soft);
-    width:min(900px, 90%);
-    height:auto;
-    padding:1.5rem;
-    border-radius:25px;
-    display:flex;
-    flex-direction:column;
-}
 
 .form-section{
+    border-top: 3px solid var(--gold);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
     display:grid;
     grid-template-rows:1fr 1fr;
     height:auto;
@@ -35,13 +25,14 @@
     gap:2rem;
 }
 
-select{
-    width:16rem;
-    box-sizing:border-box;
-    height:auto;
-    padding:12px;
-    font-size:1rem;
+.form-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
 
+.file-field{
+    background:var(--sage-soft);
 }
 
 .form-group{
@@ -51,18 +42,16 @@ select{
 
 }
 
-textArea{
-    width:30rem;
-    height:6rem;
-    border-color: var(--sage);
-    
-}
 
-.new-project-page input{
-    box-sizing:border-box;
-    width:15rem;
-    height:auto;
-    padding:12px;
+input,
+select,
+textarea {
+  border: 1px solid var(--color-border);
+  background: #fffefa;
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.9rem;
+  outline: none;
 }
 
 #add-thread-btn{
@@ -125,4 +114,8 @@ select:focus,
 textarea:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--sage);
+}
+textarea {
+  min-height: 140px;
+  resize: vertical;
 }

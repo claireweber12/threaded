@@ -53,9 +53,9 @@ function Explore(){
     ));
 
     return(
-        <div className='explore-page'>
+        <div className='page explore-page'>
             <div className='explore-page-row'>
-                <h1 className='explore-top-text'>Explore</h1>
+                <h1 className='explore-top-text page-title'>Explore</h1>
                 <div className='searchbar'>
                     <input type='text' placeholder='Search...'
                         value={searchTerm}
@@ -64,7 +64,7 @@ function Explore(){
                     <button type='button'> <FaSearch /> </button>
                 </div>
             </div>
-            <h4 className='explore-top-text'>Browse Public projects from other stitchers</h4>
+            <h4 className='explore-top-text page-description'>Browse Public projects from other stitchers</h4>
             <div className='start-explore'>
                 {filteredData.map((project) => (
                     <ProjectCard key={project.id} project={project} />

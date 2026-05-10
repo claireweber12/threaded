@@ -90,7 +90,7 @@ function ProjectDetail(){
                 )}
             </div>
             <div className='detailPage-content'>
-                <h1 className='project-name-detailPage'>{project.title}</h1>
+                <h1 className='project-name-detailPage page-title'>{project.title}</h1>
                 <div className='details'>
                     <p>{project.status}</p>
                     <p>{project.designer}</p>

@@ -101,13 +101,14 @@ function NewProject() {
 
 
     return(
-        <main className='new-project-page'>
-            <h1>Add New Project!</h1>
-            <p>Start documenting a new project</p>
+        <main className='add-project-page page'>
+            <h1 className='page-title'>Add a New Canvas!</h1>
+            <p className='page-description'>Start documenting a new project</p>
             <form className='form-card' onSubmit={handleSubmit}>
                 <h3>Project Details:</h3>
                 <div className='form-section'>
                     <input type='file'
+                    className='file-field'
                     accept='image/*'
                     onChange={(e) => setImageFile(e.target.files[0])}
                     />

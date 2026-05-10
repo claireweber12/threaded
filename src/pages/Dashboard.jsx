@@ -46,9 +46,9 @@ function Dashboard() {
   }
 
   return (
-    <main className='projects-page'>
-      <h1>My Projects</h1>
-      <p>View and manage your needlepoint projects.</p>
+    <main className='projects-page page'>
+      <h1 className='page-title'>My Projects</h1>
+      <p className='page-description'>View and manage your needlepoint projects.</p>
       <div className="filter-buttons">
         <button 
           className={`filter-button ${selectedStatus === "All" ? "active" : ""}`}
