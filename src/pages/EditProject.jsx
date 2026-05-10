@@ -31,7 +31,6 @@ function EditProject() {
         async function loadProject() {
             try{
             const data = await getProjectById(id);
-            console.log(data);
             setProject(data)
             setProjectTitle(data.title || "");
             setProjectDesigner(data.designer || "");
