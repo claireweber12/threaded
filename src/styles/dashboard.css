@@ -10,21 +10,25 @@
   gap:20px;
 }
 
+.projects-page h3{
+  color:var(--text-light);
+}
+
 .filter-buttons button{
   box-sizing:border-box;
   padding:5px 10px 5px 10px;
   border-radius:10px;
   border-width:1px;
   cursor:pointer;
-  background-color:var(--light-accent);
+  background-color:var(--accent-light);
 }
 
 .filter-buttons button:hover{
-  background-color:var(--dark-accent);
+  background-color:var(--accent);
 }
 
 .filter-button.active {
-  background-color:var(--dark-accent);
+  background-color:var(--accent);
 }
 
 .project-grid {

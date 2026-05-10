@@ -14,7 +14,7 @@
 
 
 .form-card{
-    background-color:floralwhite;
+    background-color:var(--sage-soft);
     width:min(900px, 90%);
     height:auto;
     padding:1.5rem;
@@ -54,6 +54,8 @@ select{
 textArea{
     width:30rem;
     height:6rem;
+    border-color: var(--sage);
+    
 }
 
 .new-project-page input{
@@ -82,7 +84,8 @@ textArea{
     align-self:center;
     height:2.5rem;
     font-size:1.2rem;
-    background-color: var(--light-blue);
+    background-color: var(--gold);
+    border-color:var(--border);
 
 }
 

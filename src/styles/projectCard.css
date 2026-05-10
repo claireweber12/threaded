@@ -1,22 +1,25 @@
 
 
 .project-card{
-  background-color:#ffffff;
+  background-color:var(--card-color);
   border-radius:15px;
   min-height: 20rem;
   padding:1.2rem;
   display:grid;
   grid-template-rows: 2fr 1fr;
+  box-shadow: 10px 10px 5px 0px var(--sage);
 
 }
 .project-image-placeholder{
-  background-color: var(--light-blue);
+  background-color: var(--background);
   min-height:40px;
 }
 
 .thread-palette{
   display:flex;
-  padding:10px;
+  padding:5px;
+  align-items:space-evenly;
+  gap:.4rem;
 }
 
 .row-wrapper{
@@ -29,9 +32,9 @@
   width:20px;
   height:20px;
   border-radius: 50%;
-  border: 1px solid white;
-  display:flex;
+  flex:auto;
   cursor:pointer;
+  
 }
 
 .project-card-content p{
@@ -47,7 +50,7 @@
   justify-content:space-evenly;
 }
 .project-tag{
-  background-color:var(--light-pink);
+  background-color:var(--accent-light);
   padding:7px;
   font-size: .9rem;
   border-radius: 15px;

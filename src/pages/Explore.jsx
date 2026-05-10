@@ -53,9 +53,9 @@ function Explore(){
     ));
 
     return(
-        <div className='explore page'>
+        <div className='explore-page'>
             <div className='explore-page-row'>
-                <h3 className='explore-top-text'>Explore</h3>
+                <h1 className='explore-top-text'>Explore</h1>
                 <div className='searchbar'>
                     <input type='text' placeholder='Search...'
                         value={searchTerm}

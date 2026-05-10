@@ -4,7 +4,7 @@ function Home(){
        <div className='section homepage'>
             <div className='home-text'>
                 <h1 id='title'>Threaded</h1>
-                <h3 id='subtitle'>A creative home for every canvas, color, and stitch</h3>
+                <h2 id='subtitle'>A creative home for every canvas, color, and stitch</h2>
                 <p id='description'>Track your needlepoint projects, save the threads you used, document your progress, 
                     and find inspiration from other stitchers
                 </p>

@@ -3,8 +3,8 @@
   border-radius: 1rem;
   border-width:2px;
   font-size:1.1rem;
-  background-color:var(--dark-blue);
-  border-color:var(--dark-blue);
+  background-color:var(--accent);
+  border-color:var(--accent-dark);
   color:white;
   font-weight:bold;
   cursor: pointer;
@@ -18,5 +18,5 @@
 }
 
 .home-button:hover{
-  background-color:var(--light-blue);
+  background-color:var(--accent-light);
 }
