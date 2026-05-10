@@ -258,8 +258,12 @@ function EditProject() {
                         ></textarea>
                     </div>
                 </div>
-
-                <button id='create-btn' type='submit'>Save Changes</button>
+                <div className='save-cancel-btns'>
+                    <button type="button" id="cancel-btn" onClick={() => navigate(`/projects/${id}`)}>
+                        Cancel
+                    </button>
+                    <button id='create-btn' type='submit'>Save Changes</button>
+                </div>
 
             </form>
 
