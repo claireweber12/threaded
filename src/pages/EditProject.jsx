@@ -12,6 +12,7 @@ function EditProject() {
     const [notes, setNotes] = useState("");
     const [project, setProject] = useState(null);
     const[error, setError] = useState(null);
+    const [formError, setFormError] = useState("");
     const [loading, setLoading] = useState(true);
     const [thread, setThread] = useState({
         brand:"", 
@@ -64,6 +65,14 @@ function EditProject() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        if (!projectTitle.trim()){
+            setFormError("Project title is required");
+            return;
+        }
+        if(!ProjectStatus){
+            setFormError("Project status is required");
+            return;
+        }
         let finalImageUrl = imageUrl;
         if(imageFile){
             finalImageUrl = await uploadProjectImage(imageFile);
@@ -173,6 +182,7 @@ function EditProject() {
                             <label htmlFor='title'>Title</label>
                             <input id='title' name='title' value={projectTitle}
                             onChange={(e) => setProjectTitle(e.target.value)}
+                            required
                             type='text'/>
                         </div>
                         <div className='form-group'>
@@ -187,6 +197,7 @@ function EditProject() {
                         <label htmlFor='status'>Project Status</label>
                         <select id='status' name='status' value={projectStatus}
                         onChange={(e) => setProjectStatus(e.target.value)}
+                        required
                         >
                             <option value='planned'>Planned</option>
                             <option value='in progress'>In Progress</option>
@@ -258,6 +269,7 @@ function EditProject() {
                         ></textarea>
                     </div>
                 </div>
+                {formError && <p className="form-error">{formError}</p>}
                 <div className='save-cancel-btns'>
                     <button type="button" id="cancel-btn" onClick={() => navigate(`/projects/${id}`)}>
                         Cancel

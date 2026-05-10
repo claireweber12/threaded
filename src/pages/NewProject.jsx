@@ -6,6 +6,7 @@ function NewProject() {
     const [projectTitle, setProjectTitle] = useState("");
     const [projectDesigner, setProjectDesigner] = useState("");
     const [projectStatus, setProjectStatus] = useState("");
+    const [formError, setFormError] = useState("");
     const navigate = useNavigate();
     const [notes, setNotes] = useState("");
     const [thread, setThread] = useState({
@@ -49,6 +50,16 @@ function NewProject() {
 
      async function handleSubmit(e) {
         e.preventDefault();
+        setFormError("");
+
+        if(!projectTitle.trim()) {
+            setFormError("Project title is required");
+            return;
+        }
+        if (!projectStatus){
+            setFormError("Project title is required");
+            return;
+        }
         const imageUrl = await uploadProjectImage(imageFile);
         const newProject={
             title : projectTitle,
@@ -103,6 +114,7 @@ function NewProject() {
                             <label htmlFor='title'>Title</label>
                             <input id='title' name='title' value={projectTitle}
                             onChange={(e) => setProjectTitle(e.target.value)}
+                            required
                             type='text'/>
                         </div>
                         <div className='form-group'>
@@ -117,6 +129,7 @@ function NewProject() {
                         <label htmlFor='status'>Project Status</label>
                         <select id='status' name='status' value={projectStatus}
                         onChange={(e) => setProjectStatus(e.target.value)}
+                        required
                         >
                             <option value='planned'>Planned</option>
                             <option value='in progress'>In Progress</option>
@@ -187,7 +200,7 @@ function NewProject() {
                         ></textarea>
                     </div>
                 </div>
-
+                {formError && <p className="form-error">{formError}</p>}
                 <button id='create-btn' type='submit'>Create Project</button>
 
             </form>
