@@ -77,9 +77,20 @@ function Dashboard() {
       </div>
 
       <section className="project-grid">
-        {filteredProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {filteredProjects.length > 0 ?(
+          filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))
+          ):(
+          <div className="empty-state">
+            <h2>No projects found</h2>
+            <p>
+              {selectedStatus === "All"
+                ? "Start your first project to add to your project library"
+                : `You don't have any ${selectedStatus} projects yet`}
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );

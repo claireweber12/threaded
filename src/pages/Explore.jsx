@@ -46,10 +46,10 @@ function Explore(){
     const filteredData = 
     searchTerm === ""
     ? projects
-    : sampleProjects.filter((project) => (
+    : projects.filter((project) => (
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.designer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.tags.some(t=> t.toLowerCase().includes(searchTerm.toLowerCase()))
+        project.designer.toLowerCase().includes(searchTerm.toLowerCase()) 
+        //project.tags.some(t=> t.toLowerCase().includes(searchTerm.toLowerCase()))
     ));
 
     return(
@@ -66,10 +66,16 @@ function Explore(){
             </div>
             <h4 className='explore-top-text page-description'>Browse Public projects from other stitchers</h4>
             <div className='start-explore'>
-                {filteredData.map((project) => (
+              {filteredData.length > 0 ? (
+                filteredData.map((project) => (
                     <ProjectCard key={project.id} project={project} />
-                ))}
-
+                ))
+              ):(
+                <div className="empty-state">
+                  <h2>No projects found</h2>
+                  <p>Try searching for a different title, designer, or tag</p>
+                </div>
+              )}
             </div>
         </div>
     )

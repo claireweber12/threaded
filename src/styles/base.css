@@ -98,3 +98,23 @@ body{
 button {
   cursor: pointer;
 }
+
+.empty-state {
+  grid-column: 1 / -1;
+  background-color: var(--card-color);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-state h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+}
+
+.empty-state p {
+  margin: 0;
+  color: var(--text-light);
+}
