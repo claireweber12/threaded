@@ -120,3 +120,9 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--sage);
+}
