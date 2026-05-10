@@ -7,13 +7,15 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  backdrop-filter: blur(12px);
   position:sticky;
   background-color:var(--background-soft);
   top:0;
   z-index:1000;
 
 }
+
+
+
 
 .logo{
   font-weight:bold;
@@ -39,8 +41,13 @@
   padding:0.55rem 0.85rem;
   font-weight:600;
   font-size:0.95rem;
+  color:var(--text-light);
 }
 
-.nav-links:hover{
-  color: var(--accent);
+.links-nav:hover{
+  color: var(--text);
+}
+
+.nav-links .active{
+  color: var(--accent-dark);
 }
