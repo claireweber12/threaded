@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { updateProject, getProjectById } from "../services/ProjectService";
+import { updateProject, getProjectById, uploadProjectImage } from "../services/ProjectService";
 import { useState, useEffect } from "react";
 
 
@@ -20,6 +20,10 @@ function EditProject() {
         colorHex:"",
     });
     const [threads, setThreads] = useState([]);
+    const [imageFile, setImageFile] = useState(null);
+    const [imageUrl, setImageUrl] = useState("");
+    const [removeImage, setRemoveImage] = useState(false);
+
 
     useEffect(() => {
         async function loadProject() {
@@ -31,6 +35,7 @@ function EditProject() {
             setProjectDesigner(data.designer || "");
             setProjectStatus(data.status || "");
             setNotes(data.notes || "");
+            setImageUrl(data.image_url || "");
             const formattedThreads = (data.project_threads || []).map((thread) => ({
                 brand: thread.brand || "",
                 colorNumber: thread.color_number || "",
@@ -59,12 +64,21 @@ function EditProject() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        let finalImageUrl = imageUrl;
+        if(imageFile){
+            finalImageUrl = await uploadProjectImage(imageFile);
+        }
+
+        if (removeImage){
+            finalImageUrl = null;
+        }
         const updatedProject={
             title : projectTitle,
             designer : projectDesigner,
             status : projectStatus,
             notes,
             threads,
+            image_url:finalImageUrl,
         };
         try{
             await updateProject(id, updatedProject);
@@ -111,6 +125,12 @@ function EditProject() {
         setThreads(updatedThreads);
     }
 
+    function handleDeleteImage(){
+        setImageUrl("");
+        setImageFile(null);
+        setRemoveImage(true);
+    }
+
 
 
 
@@ -129,6 +149,24 @@ function EditProject() {
             <p>start editing your project</p>
             <form className='form-card' onSubmit={handleSubmit}>
                 <h3>Project Details:</h3>
+                <div>
+                    {project.image_url ? (
+                        <img
+                            src={imageUrl}
+                            className="edit-project-image"
+                        />
+                        ) : (
+                        <input type='file'
+                            accept='image/*'
+                            onChange={(e) => setImageFile(e.target.files[0])}
+                        />
+                    )}
+
+                    <button type='button' className="delete-picture-btn" 
+                    onClick={handleDeleteImage}
+                    >Delete Image</button>
+                    
+                </div>
                 <div className='form-section'>
                     <div className='form-row'>
                         <div className='form-group'>

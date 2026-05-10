@@ -28,7 +28,6 @@
     grid-template-rows:1fr 1fr;
     height:auto;
     width:100%;
-    
 
 }
 .form-row{
@@ -85,4 +84,9 @@ textArea{
     font-size:1.2rem;
     background-color: var(--light-blue);
 
+}
+
+.edit-project-image{
+    height:20rem;
+    padding:20px;
 }

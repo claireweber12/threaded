@@ -84,7 +84,7 @@ export async function deleteProject(id){
 }
 
 export async function updateProject(id, updatedProject) {
-  const { title, designer, status, notes, threads } = updatedProject;
+  const { title, designer, status, notes, threads, image_url } = updatedProject;
 
   const { data: updatedProjectRow, error: projectError } = await supabase
     .from("projects")
@@ -93,6 +93,7 @@ export async function updateProject(id, updatedProject) {
       designer,
       status,
       notes,
+      image_url,
     })
     .eq("id", id)
     .select()
