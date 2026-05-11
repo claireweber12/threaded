@@ -1,16 +1,92 @@
-# React + Vite
+# Threaded
+Inspired by my own love for needlepoint, Threaded is a needlepoint project tracker that helps stitchers organize canvases, threads, notes, statuses, and project images.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Threaded was designed to make needlepoint tracking feel visual, personal, and inspiring. Instead of using a generic notes app or spreadsheet, users can document each canvas with the details that matter most to stitchers: designer, status, thread palette, tags, photos, and notes. The app also includes an Explore page where public projects can be browsed for inspiration, while private projects remain visible only in the user's personal project area.
 
-Currently, two official plugins are available:
+## Features
+* Create, view, edit, and delete projects.
+* Upload project images using Supabase storage.
+* Track project status including planned, in progress, completed, paused, and abandoned.
+* Save thread information including brand, name, color number, and color swatch.
+* Filter personal projects by status.
+* Search for projects on the explore page using tags, title, or designer.
+* Make projects public or private.
+* View project details including image, notes, tags, designer, and thread palette.
+*  Responsive layout for desktop and mobile screens.
+## Tech Stack
+* React
+* Vite
+* JavaScript
+* React Router
+* Supabase Database
+* Supabase Storage
+* CSS
+## Database Structure
+Threaded uses a relational data model in Supabase. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+### `projects`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Stores the main project information.
 
-## Expanding the ESLint configuration
+Key fields include:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `id (pk)`
+- `title`
+- `designer`
+- `status`
+- `notes`
+- `image_url`
+- `is_public`
+- `created_at`
+
+### `project_threads`
+
+Stores the thread palette for each project. Each project can have many thread rows.
+
+Key fields include:
+
+- `id (pk)`
+- `project_id (fk)`
+- `brand`
+- `color_number`
+- `color_name`
+- `color_hex`
+
+### `tags`
+
+Stores unique tag names.
+
+Key fields include:
+
+- `id (pk)`
+- `name`
+
+### `project_tags`
+
+Join table that creates a many-to-many relationship between projects and tags.
+
+Key fields include:
+
+- `project_id (pk, fk)`
+- `tag_id (pk, fk)`
+
+## Project Relationships
+
+- One project can have many thread colors.
+- One project can have many tags.
+- One tag can belong to many projects.
+- Public projects appear on the Explore page.
+- Private projects stay out of Explore.
+
+## Screenshots
+## Future Improvements
+* Add user authentication with Supabase Auth
+* Connect projects to individual user accounts
+* Add likes or saves for public projects
+* Add comments on public projects
+* Add project progress tracking
+* Add a dashboard summary of project counts by status
+* Improve image editing or image preview before upload
+
