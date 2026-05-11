@@ -15,7 +15,6 @@ function ProjectDetail(){
         async function loadProject() {
           try{
             const data = await getProjectById(id);
-            console.log(data);
             setProject(data)
           } catch(err) {
             console.log(err);

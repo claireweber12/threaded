@@ -12,7 +12,6 @@ function Dashboard() {
     async function loadProjects() {
       try{
         const data = await getProjects();
-        console.log("Projects with tags:", data);
         setProjects(data);
       } catch(err) {
         console.log(err);

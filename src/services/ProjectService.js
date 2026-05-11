@@ -53,8 +53,6 @@ export async function createProject(projectData){
       throw threadError;
     }
   }
-  console.log("Tags received in createProject:", tags);
-  console.log("Created project id:", createdProject.id);
 
   await upsertTagsForProject(createdProject.id, tags);
 
@@ -198,8 +196,6 @@ async function upsertTagsForProject(projectId, tagNames) {
     project_id: projectId,
     tag_id: tag.id,
   }));
-  console.log("Tag names in helper:", tagNames);
-  console.log("Project id in helper:", projectId);
 
   const { error: projectTagsError } = await supabase
     .from("project_tags")
