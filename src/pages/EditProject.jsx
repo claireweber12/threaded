@@ -26,6 +26,7 @@ function EditProject() {
     const [removeImage, setRemoveImage] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [tagsInput, setTagsInput] = useState("");
+    const[isPublic, setIsPublic] = useState(false);
 
 
     useEffect(() => {
@@ -41,6 +42,7 @@ function EditProject() {
                 .join(", ");
             setTagsInput(formattedTags);
             setNotes(data.notes || "");
+            setIsPublic(data.is_public || false);
             setImageUrl(data.image_url || "");
             const formattedThreads = (data.project_threads || []).map((thread) => ({
                 brand: thread.brand || "",
@@ -66,6 +68,10 @@ function EditProject() {
         <p>Loading projects...</p>
         </main>
     );
+    }
+
+    const handleChangePublic = () => {
+        setIsPublic(!isPublic);
     }
 
     async function handleSubmit(e) {
@@ -99,6 +105,7 @@ function EditProject() {
             notes,
             threads,
             image_url:finalImageUrl,
+            is_public: isPublic,
         };
         try{
             await updateProject(id, updatedProject);
@@ -292,6 +299,20 @@ function EditProject() {
                         <textarea id='notes' name='notes' value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                         ></textarea>
+                    </div>
+
+                    <div className='public-toggle-card'>
+                        <div>
+                            <label htmlFor='check-public'>Make this project public</label>
+                            <p className="public-toggle-description">
+                                Public projects can show up on the Explore page.
+                            </p>
+                        </div>
+
+                        <input type='checkbox' id='check-public' name='check-public'
+                            checked={isPublic} onChange={handleChangePublic}
+                            className="public-checkbox"
+                        />
                     </div>
                 </div>
                 {formError && <p className="form-error">{formError}</p>}

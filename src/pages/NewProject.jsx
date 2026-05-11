@@ -19,6 +19,7 @@ function NewProject() {
     const[threads, setThreads] = useState([]);
     const [imageFile, setImageFile] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isPublic, setIsPublic] = useState();
 
 
     function handleAddThread(){
@@ -49,6 +50,9 @@ function NewProject() {
             [name]:value,
         });
     }
+    const handleChangePublic = () => {
+        setIsPublic(!isPublic);
+    };
 
      async function handleSubmit(e) {
         e.preventDefault();
@@ -77,6 +81,7 @@ function NewProject() {
                 notes,
                 threads,
                 image_url: imageUrl,
+                is_public: isPublic,
             };
         
             
@@ -88,6 +93,7 @@ function NewProject() {
             setTagsInput("");
             setNotes("");
             setImageFile(null);
+            setIsPublic(false);
 
             setThread({
                 brand: "",
@@ -147,7 +153,8 @@ function NewProject() {
                             <select id='status' name='status' value={projectStatus}
                             onChange={(e) => setProjectStatus(e.target.value)}
                             required
-                            >
+                            >   
+                                <option value=''>Select Status</option>
                                 <option value='planned'>Planned</option>
                                 <option value='in progress'>In Progress</option>
                                 <option value='completed'>Completed</option>
@@ -224,6 +231,20 @@ function NewProject() {
                         onChange={(e) => setNotes(e.target.value)}
                         placeholder="Add project notes, stitch ideas, or anything you want to remember..."
                         ></textarea>
+                    </div>
+                
+                    <div className='public-toggle-card'>
+                        <div>
+                            <label htmlFor='check-public'>Make this project public</label>
+                            <p className="public-toggle-description">
+                                Public projects can show up on the Explore page.
+                            </p>
+                        </div>
+
+                        <input type='checkbox' id='check-public' name='check-public'
+                            checked={isPublic} onChange={handleChangePublic}
+                            className="public-checkbox"
+                        />
                     </div>
                 </div>
                 {formError && <p className="form-error">{formError}</p>}

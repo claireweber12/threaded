@@ -1,4 +1,4 @@
-import { getProjects } from "../services/projectService";
+import { getPublicProjects } from "../services/projectService";
 import ProjectCard from "../components/ProjectCard";
 import { useState, useEffect } from "react";
 import {FaSearch} from "react-icons/fa";
@@ -13,7 +13,7 @@ function Explore(){
     useEffect(() => {
     async function loadProjects() {
       try{
-        const data = await getProjects();
+        const data = await getPublicProjects();
         setProjects(data);
       } catch(err) {
         console.log(err);

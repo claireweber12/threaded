@@ -134,3 +134,37 @@ input[type='color']{
     border: none;
     background-color: var(--sage-light);
 }
+
+.public-toggle-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  margin-bottom:2rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background-color: var(--card-color);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
+.public-toggle-title {
+  display: block;
+  font-weight: 700;
+  color: #4b3326;
+  margin-bottom: 0.25rem;
+}
+
+.public-toggle-description {
+  margin: .1rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.public-checkbox {
+  width: 1.35rem;
+  height: 1.35rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}

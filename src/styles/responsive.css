@@ -112,3 +112,12 @@
 
 
 }
+@media (max-width: 480px) {
+  .public-toggle-card {
+    align-items: flex-start;
+  }
+
+  .public-checkbox {
+    margin-top: 0.2rem;
+  }
+}

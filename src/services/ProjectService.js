@@ -19,8 +19,28 @@ export async function getProjects() {
   return data;
 }
 
+export async function getPublicProjects() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(`
+      *,
+      project_threads (*),
+      project_tags(
+        tags (*)
+      )
+    `)
+    .eq("is_public", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
 export async function createProject(projectData){
-  const { title, designer, status, tags, notes, threads, image_url } = projectData;
+  const { title, designer, status, tags, notes, threads, image_url, is_public } = projectData;
   const { data: createdProject, error: projectError } = await supabase
   .from("projects")
   .insert({
@@ -29,6 +49,7 @@ export async function createProject(projectData){
     status: status,
     notes: notes,
     image_url:image_url,
+    is_public: is_public,
   })
   .select()
   .single();
@@ -92,7 +113,7 @@ export async function deleteProject(id){
 }
 
 export async function updateProject(id, updatedProject) {
-  const { title, designer, status, tags, notes, threads, image_url } = updatedProject;
+  const { title, designer, status, tags, notes, threads, image_url, is_public } = updatedProject;
 
   const { data: updatedProjectRow, error: projectError } = await supabase
     .from("projects")
@@ -102,6 +123,7 @@ export async function updateProject(id, updatedProject) {
       status,
       notes,
       image_url,
+      is_public,
     })
     .eq("id", id)
     .select()
