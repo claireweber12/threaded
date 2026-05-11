@@ -94,7 +94,7 @@ export async function deleteProject(id){
 }
 
 export async function updateProject(id, updatedProject) {
-  const { title, designer, status, notes, threads, image_url } = updatedProject;
+  const { title, designer, status, tags, notes, threads, image_url } = updatedProject;
 
   const { data: updatedProjectRow, error: projectError } = await supabase
     .from("projects")
@@ -121,6 +121,14 @@ export async function updateProject(id, updatedProject) {
   if (deleteThreadsError) {
     throw deleteThreadsError;
   }
+  const { error: deleteTagsError} = await supabase
+    .from("project_tags")
+    .delete()
+    .eq("project_id", id);
+  if (deleteTagsError){
+    throw deleteTagsError;
+  }
+  await upsertTagsForProject(id, tags);
 
   const threadRows = (threads || []).map((thread) => ({
     project_id: id,

@@ -25,6 +25,7 @@ function EditProject() {
     const [imageUrl, setImageUrl] = useState("");
     const [removeImage, setRemoveImage] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [tagsInput, setTagsInput] = useState("");
 
 
     useEffect(() => {
@@ -35,6 +36,10 @@ function EditProject() {
             setProjectTitle(data.title || "");
             setProjectDesigner(data.designer || "");
             setProjectStatus(data.status || "");
+            const formattedTags = (data.project_tags || [])
+                .map((projectTag) => projectTag.tags.name)
+                .join(", ");
+            setTagsInput(formattedTags);
             setNotes(data.notes || "");
             setImageUrl(data.image_url || "");
             const formattedThreads = (data.project_threads || []).map((thread) => ({
@@ -82,10 +87,15 @@ function EditProject() {
         if (removeImage){
             finalImageUrl = null;
         }
+        const tags = tagsInput
+            .split(",")
+            .map((tag) => tag.trim().toLowerCase())
+            .filter((tag) => tag !== "");
         const updatedProject={
             title : projectTitle,
             designer : projectDesigner,
             status : projectStatus,
+            tags,
             notes,
             threads,
             image_url:finalImageUrl,
@@ -196,18 +206,30 @@ function EditProject() {
                             />
                         </div>
                     </div>
-                    <div className='form-group form-row'>
-                        <label htmlFor='status'>Project Status</label>
-                        <select id='status' name='status' value={projectStatus}
-                        onChange={(e) => setProjectStatus(e.target.value)}
-                        required
-                        >
-                            <option value='planned'>Planned</option>
-                            <option value='in progress'>In Progress</option>
-                            <option value='completed'>Completed</option>
-                            <option value='paused'>Paused</option>
-                            <option value='abandoned'>Abandoned</option>
-                        </select>
+                    <div className="form-row">
+                        <div className='form-group'>
+                            <label htmlFor='status'>Project Status</label>
+                            <select id='status' name='status' value={projectStatus}
+                            onChange={(e) => setProjectStatus(e.target.value)}
+                            required
+                            >
+                                <option value='planned'>Planned</option>
+                                <option value='in progress'>In Progress</option>
+                                <option value='completed'>Completed</option>
+                                <option value='paused'>Paused</option>
+                                <option value='abandoned'>Abandoned</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor='tags'>Tags</label>
+                            <input id='tags'
+                                name='tags'
+                                type='text'
+                                value={tagsInput}
+                                onChange={(e) => setTagsInput(e.target.value)}
+                                placeholder="ornament, auburn, beginner"
+                            />
+                        </div>
                     </div>
                 </div>
                 <h3>Threads Used:</h3>
