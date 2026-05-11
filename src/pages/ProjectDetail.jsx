@@ -88,11 +88,11 @@ function ProjectDetail(){
                     <p>image placeholder</p>
                 </div>
                 )}
-                {project.tags && (
+                {(project.project_tags || []).length > 0 && (
                     <div className='project-tags'>
-                            {project.tags.map((tag) => (
-                                <span key={tag} className='detailed-project-tag'>
-                                    #{tag}
+                            {project.project_tags.map((projectTag) => (
+                                <span key={projectTag.tags.id} className='detailed-project-tag'>
+                                    #{projectTag.tags.name}
                                 </span>
                             ))}
                     </div>

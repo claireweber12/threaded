@@ -5,7 +5,10 @@ export async function getProjects() {
     .from("projects")
     .select(`
       *,
-      project_threads (*)
+      project_threads (*),
+      project_tags(
+        tags (*)
+      )
     `)
     .order("created_at", { ascending: false });
 
@@ -17,7 +20,7 @@ export async function getProjects() {
 }
 
 export async function createProject(projectData){
-  const { title, designer, status, notes, threads, image_url } = projectData;
+  const { title, designer, status, tags, notes, threads, image_url } = projectData;
   const { data: createdProject, error: projectError } = await supabase
   .from("projects")
   .insert({
@@ -50,6 +53,10 @@ export async function createProject(projectData){
       throw threadError;
     }
   }
+  console.log("Tags received in createProject:", tags);
+  console.log("Created project id:", createdProject.id);
+
+  await upsertTagsForProject(createdProject.id, tags);
 
   return createdProject;
 
@@ -60,7 +67,10 @@ export async function getProjectById(passedId){
     .from("projects")
     .select(`
       *,
-      project_threads (*)
+      project_threads (*),
+      project_tags (
+        tags (*)
+      )
     `)
     .eq("id", passedId)
     .single();
@@ -156,5 +166,39 @@ export async function uploadProjectImage(file) {
   
   return data.publicUrl;
     
+}
+
+async function upsertTagsForProject(projectId, tagNames) {
+  if (!tagNames || tagNames.length === 0) {
+    return;
+  }
+
+  const uniqueTagNames = [...new Set(tagNames)];
+
+  const tagRows = uniqueTagNames.map((name) => ({ name }));
+
+  const { data: tags, error: tagsError } = await supabase
+    .from("tags")
+    .upsert(tagRows, { onConflict: "name" })
+    .select();
+
+  if (tagsError) {
+    throw tagsError;
+  }
+
+  const projectTagRows = tags.map((tag) => ({
+    project_id: projectId,
+    tag_id: tag.id,
+  }));
+  console.log("Tag names in helper:", tagNames);
+  console.log("Project id in helper:", projectId);
+
+  const { error: projectTagsError } = await supabase
+    .from("project_tags")
+    .insert(projectTagRows);
+
+  if (projectTagsError) {
+    throw projectTagsError;
+  }
 }
 

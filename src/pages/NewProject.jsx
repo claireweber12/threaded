@@ -7,6 +7,7 @@ function NewProject() {
     const [projectDesigner, setProjectDesigner] = useState("");
     const [projectStatus, setProjectStatus] = useState("");
     const [formError, setFormError] = useState("");
+    const [tagsInput, setTagsInput] = useState("");
     const navigate = useNavigate();
     const [notes, setNotes] = useState("");
     const [thread, setThread] = useState({
@@ -58,25 +59,35 @@ function NewProject() {
             return;
         }
         if (!projectStatus){
-            setFormError("Project title is required");
+            setFormError("Project status is required");
             return;
         }
+        const tags = tagsInput
+            .split(",")
+            .map((tag)=> tag.trim().toLowerCase())
+            .filter((tag) => tag !== "");
         setIsSubmitting(true);
-        const imageUrl = await uploadProjectImage(imageFile);
-        const newProject={
-            title : projectTitle,
-            designer : projectDesigner,
-            status : projectStatus,
-            notes : notes,
-            threads : threads,
-            image_url: imageUrl,
-        };
         try{
+            const imageUrl = await uploadProjectImage(imageFile);
+            const newProject={
+                title : projectTitle,
+                designer : projectDesigner,
+                status : projectStatus,
+                tags,
+                notes,
+                threads,
+                image_url: imageUrl,
+            };
+        
+            
             await createProject(newProject);
+
             setProjectTitle("");
             setProjectDesigner("");
             setProjectStatus("");
+            setTagsInput("");
             setNotes("");
+            setImageFile(null);
 
             setThread({
                 brand: "",
@@ -92,7 +103,7 @@ function NewProject() {
                 console.error(err);
                 alert("Something went wrong while creating the project");
             }finally{
-                setIsSubmitting("true");
+                setIsSubmitting(false);
             }
         
         }
@@ -130,18 +141,28 @@ function NewProject() {
                             />
                         </div>
                     </div>
-                    <div className='form-group form-row'>
-                        <label htmlFor='status'>Project Status</label>
-                        <select id='status' name='status' value={projectStatus}
-                        onChange={(e) => setProjectStatus(e.target.value)}
-                        required
-                        >
-                            <option value='planned'>Planned</option>
-                            <option value='in progress'>In Progress</option>
-                            <option value='completed'>Completed</option>
-                            <option value='paused'>Paused</option>
-                            <option value='abandoned'>Abandoned</option>
-                        </select>
+                    <div className="form-row">
+                        <div className='form-group'>
+                            <label htmlFor='status'>Project Status</label>
+                            <select id='status' name='status' value={projectStatus}
+                            onChange={(e) => setProjectStatus(e.target.value)}
+                            required
+                            >
+                                <option value='planned'>Planned</option>
+                                <option value='in progress'>In Progress</option>
+                                <option value='completed'>Completed</option>
+                                <option value='paused'>Paused</option>
+                                <option value='abandoned'>Abandoned</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor='tags'>Tags</label>
+                            <input name='tags' id='tags' placeholder="round, holiday, ornament"
+                                type='text'
+                                value={tagsInput}
+                                onChange={(e) => setTagsInput(e.target.value)}
+                            />
+                        </div>
                     </div>
                 </div>
                 <h3>Threads Used:</h3>

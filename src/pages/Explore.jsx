@@ -43,13 +43,16 @@ function Explore(){
     );
     }
 
+   
+
     const filteredData = 
     searchTerm === ""
     ? projects
     : projects.filter((project) => (
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.designer.toLowerCase().includes(searchTerm.toLowerCase()) 
-        //project.tags.some(t=> t.toLowerCase().includes(searchTerm.toLowerCase()))
+        project.designer.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (project.project_tags || []).some((projectTag) =>
+        projectTag.tags.name.toLowerCase().includes(searchTerm.toLowerCase()))
     ));
 
     return(
