@@ -45,7 +45,7 @@ body {
 }
 
 .page{
-  width:min(1120px, calc(100% - 2em));
+  width:min(1120px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 3rem 0;
 }
