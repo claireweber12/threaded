@@ -255,10 +255,10 @@ function EditProject() {
                             value={thread.colorName} onChange={handleThreadChange}
                             />
                         </div>
-                        <div className='form-group'>
-                            <label htmlFor='colorHex'>Hex Value</label>
-                            <input id='colorHex' name='colorHex' type='text'
-                            value={thread.colorHex} onChange={handleThreadChange}
+                        <div className='form-group pick-color'>
+                            <label htmlFor='colorHex'>Thread Color</label>
+                            <input id='colorHex' name='colorHex' type='color'
+                            value={thread.colorHex || '#ffffff'} onChange={handleThreadChange}
                             />
                         </div>
                     </div>

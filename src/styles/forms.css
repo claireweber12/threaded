@@ -119,3 +119,18 @@ textarea {
   min-height: 140px;
   resize: vertical;
 }
+
+.pick-color{
+    display:flex;
+    flex-direction:row;
+    gap:1rem;
+    align-items:center;
+}
+
+input[type='color']{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border: none;
+    background-color: var(--sage-light);
+}
