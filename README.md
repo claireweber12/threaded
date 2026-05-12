@@ -1,5 +1,7 @@
 # Threaded 
 [View Threaded](https://main.d3bty356y6d0wb.amplifyapp.com)
+
+
 Inspired by my own love for needlepoint, Threaded is a needlepoint project tracker that helps stitchers organize canvases, threads, notes, statuses, and project images.
 
 ## Overview
