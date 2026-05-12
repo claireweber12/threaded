@@ -89,6 +89,11 @@ Key fields include:
 - Private projects stay out of Explore.
 
 ## Screenshots
+
+<img width="1440" height="787" alt="image" src="https://github.com/user-attachments/assets/2275086a-264a-433c-9e71-ecc1f52d6d0b" />
+<img width="1440" height="787" alt="image" src="https://github.com/user-attachments/assets/1bc30adb-9d39-434d-9f8e-382d193bb78b" />
+
+
 ## Future Improvements
 * Add user authentication with Supabase Auth
 * Connect projects to individual user accounts
