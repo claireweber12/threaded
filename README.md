@@ -1,4 +1,5 @@
-# Threaded
+# Threaded 
+[View Threaded](https://main.d3bty356y6d0wb.amplifyapp.com)
 Inspired by my own love for needlepoint, Threaded is a needlepoint project tracker that helps stitchers organize canvases, threads, notes, statuses, and project images.
 
 ## Overview
@@ -22,6 +23,11 @@ Threaded was designed to make needlepoint tracking feel visual, personal, and in
 * Supabase Database
 * Supabase Storage
 * CSS
+
+## Deployment
+
+Threaded is deployed using AWS Amplify Hosting. The frontend is built with Vite and hosted as a static React application, with Supabase providing the backend database and image storage.
+
 ## Database Structure
 Threaded uses a relational data model in Supabase. 
 
