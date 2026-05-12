@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProjectById, deleteProject} from "../services/projectService";
+import { getProjectById, deleteProject} from "../services/ProjectService";
 
 
 function ProjectDetail(){

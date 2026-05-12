@@ -1,7 +1,7 @@
 
 import ProjectCard from "../components/ProjectCard";
 import { useEffect, useState } from "react";
-import { getProjects } from "../services/projectService";
+import { getProjects } from "../services/ProjectService";
 
 function Dashboard() {
   const [projects, setProjects] = useState([]);

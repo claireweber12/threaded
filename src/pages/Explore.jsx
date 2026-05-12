@@ -1,4 +1,4 @@
-import { getPublicProjects } from "../services/projectService";
+import { getPublicProjects } from "../services/ProjectService";
 import ProjectCard from "../components/ProjectCard";
 import { useState, useEffect } from "react";
 import {FaSearch} from "react-icons/fa";
