@@ -10,7 +10,7 @@
     width:100%;
     padding:1.5rem 5%;
     height:auto;
-    background-color: var(sage-soft);
+    background-color: var(--sage-soft);
     border-radius: 30px;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
